@@ -138,6 +138,7 @@ body {
     
     body {
         overflow-y: auto; 
+        overflow-x: hidden;
     }
 
     .gallery-container {
@@ -166,6 +167,18 @@ body {
         top: auto;
     }
 
+    /* NOUVELLE RÈGLE pour le chevauchement vertical sur mobile */
+    .overlap-top-right {
+        /* Utilisez une marge négative pour faire remonter le bloc sur le précédent */
+        margin-top: -20%; /* Ajustez cette valeur pour contrôler le chevauchement (ex: -30px) */
+    }
+    
+    /* ATTENTION : Le z-index doit être géré pour l'empilement */
+    .overlap-top-left .image-placeholder {
+        z-index: 1; /* S'assurer qu'il passe au-dessus de l'image 1 */
+        position: relative; /* Nécessaire pour que le z-index fonctionne */
+    }
+
     /* Le groupe du bas s'empile également */
     .bottom-group {
         flex-direction: column;
@@ -173,20 +186,27 @@ body {
         gap: 10px;
     }
     
-    /* Taille des images sur mobile */
-    .image-link {
-        width: 90%; 
-        max-width: 400px;
-    }
+/* Taille des images sur mobile */
+.image-link {
+    width: 90%; /* Garde une marge de 5% de chaque côté */
+    /* MODIFICATION CRUCIALE : Augmenter la max-width pour éviter que 
+       les éléments du haut ne soient trop étroits, ou la supprimer. */
+    max-width: 450px; /* Exemple : Fixons une largeur max raisonnable (vos blocs étaient 500px) */
+}
 
-    .image-placeholder {
-        width: 100%; 
-        /*height: 180px; */
-    }
+.image-placeholder {
+    width: 100%; 
+    /* height: 180px;  <-- On peut la supprimer et utiliser aspect-ratio pour une meilleure gestion */
+    height: auto;
+    /* AJOUT : Définit un ratio 2:1 (largeur:hauteur) pour les blocs du bas (400x200) */
+    aspect-ratio: 2 / 1; 
+}
 
-    #img1, #img2 {
-        /* Nous avions 500px de large et 250px de haut sur desktop (ratio 2:1). */
-        /* Nous conservons ce ratio pour la hauteur mobile. */
-        height: 250px; 
-    }
+/* Adapter la hauteur/ratio des placeholders du haut à la nouvelle proportion */
+#img1, #img2 {
+    /* RETRAIT : Supprimons la hauteur fixe (250px) car elle cause le débordement. */
+    /* MODIFICATION : Utilisons aspect-ratio (500px/250px = 2/1) */
+    height: auto; /* Important : annule la hauteur fixe pour s'adapter */
+    aspect-ratio: 2 / 1; 
+}
 }
