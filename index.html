@@ -24,12 +24,50 @@
 
         <div class="bottom-group">
             <a href="https://github.com/LucieMrc" class="image-link bottom-left">
-                <div class="image-placeholder" id="img3">Image 3 (Bas Gauche)</div>
+                <div class="image-placeholder" id="img3">Ressources</div>
             </a>
             <a href="https://luciemrc.github.io/Quizz_interior_design/" class="image-link bottom-right">
-                <div class="image-placeholder" id="img4">Image 4 (Bas Droit)</div>
+                <div class="image-placeholder" id="img4">Quizz</div>
+            </a>
+
+            <a href="#" class="image-link bottom-right" id="tools-trigger"> 
+                <div class="image-placeholder" id="img5">Tools</div>
             </a>
         </div>
     </div>
+    
+    <div id="tools-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <ul>
+                <li><a href="https://github.com/LucieMrc/Dither_touchdesigner" target="_blank">Dither in TD</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Récupération des éléments
+        const modal = document.getElementById("tools-modal");
+        const toolsButton = document.getElementById("tools-trigger");
+        const closeButton = document.querySelector(".close-button");
+
+        // Ouvre la modale lors du clic sur le lien "Tools"
+        toolsButton.onclick = function(e) {
+          e.preventDefault(); // Empêche le lien de naviguer (car href est '#')
+          modal.style.display = "block";
+        }
+
+        // Ferme la modale via le bouton 'x'
+        closeButton.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // Ferme la modale si l'utilisateur clique en dehors du contenu (sur l'arrière-plan sombre)
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    </script>
 </body>
 </html>

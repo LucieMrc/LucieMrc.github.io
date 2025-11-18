@@ -85,6 +85,10 @@ body {
     background-image: url('img5.svg'); /* MODIFIEZ le chemin d'accès */
 }
 
+#img5 {
+    background-image: url('img6.png'); /* MODIFIEZ le chemin d'accès */
+}
+
 /* 3. Groupe du Haut (Positionnement et Chevauchement) */
 .top-group {
     grid-area: top-area; /* Positionné sur la zone du haut de la grille */
@@ -146,7 +150,7 @@ body {
         grid-template-areas: 
             "top-area"
             "bottom-area";
-        padding: 20px 0;
+        padding: 20px 0 0 0;
         height: auto;
     }
     
@@ -184,6 +188,7 @@ body {
         flex-direction: column;
         align-items: center;
         gap: 10px;
+        padding : 0;
     }
     
 /* Taille des images sur mobile */
@@ -205,4 +210,156 @@ body {
     height: auto; /* Important : annule la hauteur fixe pour s'adapter */
     aspect-ratio: 2 / 1; 
 }
+}
+
+/* --- Styles pour la Pop-up Modale (Ajouter à la fin de style.css) --- */
+
+/* 1. Conteneur principal de la modale (l'arrière-plan sombre) */
+.modal {
+    /* Cache par défaut (le JavaScript le mettra à 'block' au clic) */
+    display: none;
+    /* Reste fixe dans la fenêtre (même en scrollant) */
+    position: fixed;
+    /* Met la modale au-dessus de tout le reste */
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* Arrière-plan semi-transparent */
+    /*background-color: rgba(255, 0, 255, 0.1);*/
+}
+
+/* 2. Contenu de la Pop-up (la boîte blanche) */
+.modal-content {
+    /*background-color: rgba(0, 0, 0, 0.9);*/
+
+    background-color: transparent; /* OU supprimez cette ligne si vous voulez que l'image couvre tout */
+    
+    background-image: url('forme1.png'); /* <<< AJOUTEZ CETTE LIGNE */
+    background-size: cover;    /* L'image couvrira toute la surface, en coupant si nécessaire */
+    background-position: center; /* Centre l'image dans le fond */
+    background-repeat: no-repeat; /* Empêche l'image de se répéter */
+    
+    /* Positionnement en bas à droite de la fenêtre */
+    position: absolute;
+    bottom: 8%;
+    right: 13%;
+    
+    /* Taille : un quart de la page */
+    /* 50% de la largeur et 50% de la hauteur du viewport */
+    width: 22vw;
+    height: 13.86vw;
+
+    padding: 30px;
+    /* Coins arrondis pour un look plus moderne */
+    /*border-radius: 200px;*/
+    overflow: auto; /* Permet de scroller si le contenu est trop grand */
+
+    display: flex;
+    flex-direction: column; /* Organise le contenu du haut vers le bas */
+    justify-content: center; /* Centre les éléments verticalement */
+    align-items: center;     /* Centre les éléments horizontalement */
+}
+
+/* 3. Bouton de fermeture 'x' */
+.close-button {
+    color: #ae2c66;
+    float: right;
+    font-size: 36px;
+    font-weight: lighter; /* Moins gras que le 'bold' par défaut pour plus de douceur */
+    line-height: 1; /* Assure le bon alignement */
+    margin-top: -10px; /* Ajustement de la position */
+    position: absolute; /* Place le bouton indépendamment du centrage Flexbox */
+    top: 10px;          /* Le place près du bord supérieur */
+    right: 20px;        /* Le place près du bord droit */
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: rgb#811646; /* Rouge au survol */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 4. Style des liens dans la pop-up */
+.modal-content h2 {
+    color: #f7f7f7;
+    /*border-bottom: 2px solid #eee;*/
+}
+
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-content li {
+    margin-bottom: 10px;
+}
+
+.modal-content a {
+    color: #f7f7f7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.modal-content a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+/* 5. MEDIA QUERY pour adapter la taille de la pop-up sur les petits écrans */
+@media (max-width: 768px) {
+    .modal {
+        /* Permet à la modale de faire partie du flux normal de la page */
+        position: static; 
+        
+        /* Annuler la couverture plein écran */
+        width: 100%;
+        height: auto;
+        
+        /* Assure que la pop-up est cachée par défaut (le JS la mettra à 'block') */
+        display: none; 
+        
+        /* IMPORTANT : Désactiver l'arrière-plan sombre sur mobile */
+        background-color: transparent; 
+        
+        /* Ajoutez une marge pour l'espace visuel après l'ouverture */
+        /*margin-top: 20px;
+        margin-bottom: 50px;*/
+    }
+
+    .modal-content {
+        /* Annuler la position absolue/fixe */
+        position: relative; 
+
+        top : -100px;
+        
+        /* Prendre toute la largeur du conteneur (qui est maintenant 100%) */
+        width: 70vw; 
+        /* Définir une hauteur automatique pour que le contenu ne soit pas coupé */
+        height: 44.1vw; 
+        /*min-height: 250px; /* Hauteur minimale pour qu'elle soit visible */
+        
+        /* Centrer la boîte au milieu de la largeur (si vous avez utilisé width < 100%) */
+        margin: 0 auto; 
+        
+        /* Annuler l'alignement en bas à droite */
+        bottom: auto;
+        right: auto;
+        
+        /* Garder l'alignement du contenu à l'intérieur (le centrage vertical/horizontal) */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10; /* Assure qu'il est au-dessus du contenu */
+        color: #ae2c66; /* Ajustez la couleur pour qu'elle contraste bien avec le fond */
+    }
 }
