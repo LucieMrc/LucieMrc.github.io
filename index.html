@@ -3,158 +3,257 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
     <title>Lucie MRC</title>
 
     <style>
-        /* 1. Variables et Polices */
-        :root {
-          --bg-color: #171717;
-          --text-color: rgb(246, 244, 241);
-        }
-      
-        body.light-mode {
-          --bg-color: #f5f5f5;
-          --text-color: #171717;
-        }
-      
-        @font-face {
-          font-family: "Roboto Mono Variable";
-          src: url("fonts/RobotoMono-VariableFont_wght.ttf") format("truetype-variations");
-          font-weight: 100 900;
-          font-style: normal;
-        }
-      
-        /* 2. Styles Généraux */
-        body, html {
-          margin: 0;
-          padding: 0;
-          width: 100%;
-          height: 100%;
-          overflow-x: hidden;
-          background-color: var(--bg-color);
-          color: var(--text-color);
-          font-family: "Roboto Mono Variable", monospace;
-          transition: background-color 0.4s ease, color 0.4s ease;
-        }
-      
-        .collage-container {
-          position: relative;
-          width: 100vw;
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      
-        /* 3. Texte Central (Nettoyé) */
-        .title-center {
-          position: relative; /* Garde le texte au milieu du flux */
-          color: var(--text-color); /* Utilise la variable maintenant */
-          font-size: 6rem;
-          font-weight: 400;
-          letter-spacing: -3px;
-          text-align: center;
-          z-index: 10; 
-          pointer-events: none;
-          margin: 0;
-          transition: color 0.4s ease;
-        }
-      
-        /* 4. Bouton de bascule */
-        .mode-toggle {
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          z-index: 1000;
-          padding: 8px 12px;
-          cursor: pointer;
-          background: var(--text-color);
-          color: var(--bg-color);
-          border: none;
-          font-family: inherit;
-          font-weight: bold;
-          text-transform: uppercase;
-          font-size: 0.8rem;
-          transition: background 0.4s ease, color 0.4s ease;
-        }
-      
-        /* 5. Images et Collage */
-        .item {
-          position: absolute;
-          z-index: 5;
-          transition: transform 0.3s ease;
-        }
-      
-        .item img {
-          width: 100%;
-          height: auto;
-          display: block;
-        }
-      
-        .link:hover {
-          transform: scale(1.1) rotate(0deg) !important;
-          z-index: 100;
-        }
-      
-        /* Positionnements */
-        .ordi { width: 18%; 
-                top: 18%; 
-                left: 32%; 
-                transform: rotate(-5deg); 
-            }
-        .main { width: 12%; 
-                top: 52%; 
-                left: 25%; 
-                transform: rotate(-5deg); 
-            }
-        .etagere { width: 8%; 
-                top: 22%; 
-                right: 25%; 
-                transform: rotate(5deg); 
-            }
-        .insta { width: 15%; 
-                top: 55%; 
-                right: 20%; 
-                transform: rotate(5deg); 
-            }
-        .food { width: 13%; 
-                top: 23%; 
-                left: 50%; 
-                transform: rotate(-3deg); 
-            }
-        .legumes { width: 12%; 
-                top: 60%; 
-                left: 35%; 
-                transform: rotate(5deg); 
-            }
-        .arturia { width: 13%; 
-                top: 65%; 
-                right: 26%; 
-                transform: rotate(15deg); 
-            }
-        .bob { width: 15%; 
-                top: 52%; 
-                right: 38%; 
-                transform: rotate(5deg); 
-            }
-        .voiture { width: 18%; 
-                top: 33%; 
-                left: 18%; 
-                transform: rotate(5deg); 
-            }
-      
-        /* 6. Responsive */
-        @media (max-width: 768px) {
-          .title-center {
-            font-size: 3rem;
-          }
-          .item {
-            width: 30%; /* Un peu plus grand sur mobile pour la lisibilité */
-          }
-        }
-      </style>
+      /* 1. Variables et Polices */
+      :root {
+        --bg-color: #171717;
+        --text-color: rgb(246, 244, 241);
+      }
 
+      body.light-mode {
+        --bg-color: #f5f5f5;
+        --text-color: #171717;
+      }
+
+      @font-face {
+        font-family: "Roboto Mono Variable";
+        src: url("fonts/RobotoMono-VariableFont_wght.ttf")
+          format("truetype-variations");
+        font-weight: 100 900;
+        font-style: normal;
+      }
+
+      /* 2. Styles Généraux */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Roboto Mono Variable", monospace;
+        transition: background-color 0.4s ease, color 0.4s ease;
+      }
+
+      .collage-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* 3. Texte Central (Nettoyé) */
+      .title-center {
+        position: relative; /* Garde le texte au milieu du flux */
+        color: var(--text-color); /* Utilise la variable maintenant */
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: -3px;
+        text-align: center;
+        z-index: 10;
+        pointer-events: none;
+        margin: 0;
+        transition: color 0.4s ease;
+      }
+
+      /* 4. Bouton de bascule */
+      .mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 8px 12px;
+        cursor: pointer;
+        background: var(--text-color);
+        color: var(--bg-color);
+        border: none;
+        font-family: inherit;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        transition: background 0.4s ease, color 0.4s ease;
+      }
+
+      /* 5. Images et Collage */
+      .item {
+        position: absolute;
+        z-index: 5;
+        transition: transform 0.3s ease;
+      }
+
+      .item img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .link:hover {
+        transform: scale(1.1) rotate(0deg) !important;
+        z-index: 100;
+      }
+
+      /* Positionnements */
+      .ordi {
+        width: 18%;
+        top: 18%;
+        left: 32%;
+        transform: rotate(-5deg);
+      }
+      .main {
+        width: 12%;
+        top: 52%;
+        left: 25%;
+        transform: rotate(-5deg);
+      }
+      .etagere {
+        width: 8%;
+        top: 22%;
+        right: 25%;
+        transform: rotate(5deg);
+      }
+      .insta {
+        width: 15%;
+        top: 55%;
+        right: 20%;
+        transform: rotate(5deg);
+      }
+      .food {
+        width: 13%;
+        top: 23%;
+        left: 50%;
+        transform: rotate(-3deg);
+      }
+      .legumes {
+        width: 12%;
+        top: 60%;
+        left: 35%;
+        transform: rotate(5deg);
+      }
+      .arturia {
+        width: 13%;
+        top: 65%;
+        right: 26%;
+        transform: rotate(15deg);
+      }
+      .bob {
+        width: 15%;
+        top: 52%;
+        right: 38%;
+        transform: rotate(5deg);
+      }
+      .voiture {
+        width: 18%;
+        top: 33%;
+        left: 18%;
+        transform: rotate(5deg);
+      }
+
+      /* 6. RESPONSIVE (MOBILE) - Stratégie Zig-Zag */
+      @media (max-width: 768px) {
+        .title-center {
+          font-size: 3rem; /* On réduit le titre pour laisser de la place */
+          width: 90%; /* Largeur max */
+          /*top: 50%; /* Centrage vertical strict */
+          transform: translateY(-55%); /* Ajustement fin */
+        }
+
+        /* Règle générale pour mobile : on écarte des bords */
+        .item {
+          width: 28%; /* Taille moyenne confortable */
+          max-width: 120px; /* Sécurité pour les grands téléphones */
+        }
+
+        /* --- ZONE HAUTE (0% à 40%) --- */
+
+        /* Tout en haut, comme un en-tête */
+        .etagere {
+          width: 25%;
+          top: 5%;
+          right: 35%; /* Presque centrée */
+          left: auto;
+          transform: rotate(0deg);
+        }
+
+        /* Haut Gauche */
+        .ordi {
+          width: 35%;
+          top: 12%;
+          left: 8%; /* Marge du bord gauche */
+          transform: rotate(-5deg);
+        }
+
+        /* Haut Droite */
+        .food {
+          width: 22%;
+          top: 15%;
+          right: 8%; /* Marge du bord droit */
+          left: auto;
+          transform: rotate(10deg);
+        }
+
+        /* Juste au-dessus du titre à gauche */
+        .voiture {
+          width: 30%;
+          top: 30%;
+          left: 5%;
+          transform: rotate(5deg);
+        }
+
+        /* --- ZONE BASSE (60% à 100%) --- */
+
+        /* Juste en-dessous du titre à droite */
+        .main {
+          width: 20%;
+          top: 58%;
+          right: 10%;
+          left: auto;
+          transform: rotate(-10deg);
+        }
+
+        /* En dessous à gauche */
+        .bob {
+          width: 25%;
+          top: 65%;
+          left: 10%;
+          right: auto;
+          transform: rotate(10deg);
+        }
+
+        /* Plus bas à droite */
+        .insta {
+          width: 25%;
+          top: 75%;
+          right: 12%;
+          left: auto;
+          transform: rotate(-5deg);
+        }
+
+        /* Plus bas à gauche (Clavier) */
+        .arturia {
+          width: 30%;
+          top: 82%;
+          left: 8%;
+          right: auto;
+          transform: rotate(8deg);
+        }
+
+        /* Tout en bas au centre/droite */
+        .legumes {
+          width: 20%;
+          top: 85%;
+          right: 30%;
+          left: auto;
+          transform: rotate(-5deg);
+        }
+      }
+    </style>
   </head>
   <body>
     <button class="mode-toggle" id="themeBtn">Mode Clair</button>
@@ -176,25 +275,37 @@
 
       <div class="item voiture">
         <img src="medias8.png" alt="voiture" />
-    </div>
+      </div>
 
       <a href="https://github.com/LucieMrc" class="item link ordi">
         <img src="medias.png" alt="ordi" />
       </a>
 
-      <a href="https://github.com/LucieMrc/Dither_touchdesigner" class="item link main">
+      <a
+        href="https://github.com/LucieMrc/Dither_touchdesigner"
+        class="item link main"
+      >
         <img src="medias3.png" alt="main" />
       </a>
 
-      <a href="https://luciemrc.github.io/Quizz_interior_design/" class="item link etagere">
+      <a
+        href="https://luciemrc.github.io/Quizz_interior_design/"
+        class="item link etagere"
+      >
         <img src="medias2.png" alt="etagere" />
       </a>
 
-      <a href="https://www.instagram.com/ateliernum/?hl=fr" class="item link bob">
+      <a
+        href="https://www.instagram.com/ateliernum/?hl=fr"
+        class="item link bob"
+      >
         <img src="medias5.png" alt="bob" />
       </a>
 
-      <a href="https://www.instagram.com/luciemrc/?hl=fr" class="item link insta">
+      <a
+        href="https://www.instagram.com/luciemrc/?hl=fr"
+        class="item link insta"
+      >
         <img src="img3.svg" alt="insta" />
       </a>
 
@@ -203,21 +314,20 @@
       </a>-->
     </div>
 
-
     <script>
-        const btn = document.getElementById("themeBtn");
-        const body = document.body;
-  
-        btn.addEventListener("click", () => {
-          body.classList.toggle("light-mode");
-  
-          // Optionnel : changer le texte du bouton
-          if (body.classList.contains("light-mode")) {
-            btn.textContent = "Mode Sombre";
-          } else {
-            btn.textContent = "Mode Clair";
-          }
-        });
-      </script>
+      const btn = document.getElementById("themeBtn");
+      const body = document.body;
+
+      btn.addEventListener("click", () => {
+        body.classList.toggle("light-mode");
+
+        // Optionnel : changer le texte du bouton
+        if (body.classList.contains("light-mode")) {
+          btn.textContent = "Mode Sombre";
+        } else {
+          btn.textContent = "Mode Clair";
+        }
+      });
+    </script>
   </body>
 </html>
