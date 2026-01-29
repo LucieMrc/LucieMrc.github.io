@@ -157,6 +157,24 @@
 
       /* 6. RESPONSIVE (MOBILE) - Stratégie Zig-Zag */
       @media (max-width: 768px) {
+        /* 4. Bouton de bascule */
+        .mode-toggle {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          z-index: 1000;
+          padding: 6px 10px;
+          cursor: pointer;
+          background: var(--text-color);
+          color: var(--bg-color);
+          border: none;
+          font-family: inherit;
+          font-weight: bold;
+          text-transform: uppercase;
+          font-size: 0.6rem;
+          transition: background 0.4s ease, color 0.4s ease;
+        }
+
         .title-center {
           font-size: 3rem; /* On réduit le titre pour laisser de la place */
           width: 90%; /* Largeur max */
@@ -172,47 +190,47 @@
 
         /* --- ZONE HAUTE (0% à 40%) --- */
 
-        /* Tout en haut, comme un en-tête */
-        .etagere {
-          width: 25%;
-          top: 5%;
-          right: 35%; /* Presque centrée */
-          left: auto;
-          transform: rotate(0deg);
-        }
-
         /* Haut Gauche */
         .ordi {
           width: 35%;
-          top: 12%;
+          top: 22%;
           left: 8%; /* Marge du bord gauche */
           transform: rotate(-5deg);
-        }
-
-        /* Haut Droite */
-        .food {
-          width: 22%;
-          top: 15%;
-          right: 8%; /* Marge du bord droit */
-          left: auto;
-          transform: rotate(10deg);
         }
 
         /* Juste au-dessus du titre à gauche */
         .voiture {
           width: 30%;
-          top: 30%;
-          left: 5%;
+          top: 32%;
+          left: 62%;
           transform: rotate(5deg);
         }
 
         /* --- ZONE BASSE (60% à 100%) --- */
 
+        /* Tout en haut, comme un en-tête */
+        .etagere {
+          width: 18%;
+          top: 53%;
+          right: 42%; /* Presque centrée */
+          left: auto;
+          transform: rotate(-5deg);
+        }
+
+        /* Plus bas à droite */
+        .insta {
+          width: 25%;
+          top: 25%;
+          right: 8%;
+          left: auto;
+          transform: rotate(5deg);
+        }
+
         /* Juste en-dessous du titre à droite */
         .main {
           width: 20%;
-          top: 58%;
-          right: 10%;
+          top: 50%;
+          right: 15%;
           left: auto;
           transform: rotate(-10deg);
         }
@@ -220,36 +238,35 @@
         /* En dessous à gauche */
         .bob {
           width: 25%;
-          top: 65%;
+          top: 50%;
           left: 10%;
           right: auto;
           transform: rotate(10deg);
         }
 
-        /* Plus bas à droite */
-        .insta {
-          width: 25%;
-          top: 75%;
-          right: 12%;
+        /* Haut Droite */
+        .food {
+          width: 22%;
+          top: 68%;
+          right: 16%; /* Marge du bord droit */
           left: auto;
-          transform: rotate(-5deg);
+          transform: rotate(0deg);
         }
 
         /* Plus bas à gauche (Clavier) */
         .arturia {
-          width: 30%;
-          top: 82%;
-          left: 8%;
+          width: 20%;
+          top: 25%;
+          left: 42%;
           right: auto;
-          transform: rotate(8deg);
+          transform: rotate(-8deg);
         }
 
         /* Tout en bas au centre/droite */
         .legumes {
           width: 20%;
-          top: 85%;
-          right: 30%;
-          left: auto;
+          top: 68%;
+          left: 15%;
           transform: rotate(-5deg);
         }
       }
