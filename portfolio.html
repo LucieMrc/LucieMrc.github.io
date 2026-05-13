@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <title>Portfolio - Lucie MRC</title>
+
+    <style>
+        /* Variables et Polices (Identiques à index.html) */
+        :root {
+            --bg-color: #171717;
+            --text-color: rgb(246, 244, 241);
+        }
+
+        body.light-mode {
+            --bg-color: #f5f5f5;
+            --text-color: #171717;
+        }
+
+        @font-face {
+            font-family: "Roboto Mono Variable";
+            src: url("fonts/RobotoMono-VariableFont_wght.ttf") format("truetype-variations");
+            font-weight: 100 900;
+            font-style: normal;
+        }
+
+        /* Styles Généraux */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Roboto Mono Variable", monospace;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow: hidden;
+            /* We'll use a container for scroll snap */
+        }
+
+        /* Scroll Snap Container */
+        .pages-wrapper {
+            width: 100%;
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
+            /* Space for header */
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Boutons Header */
+        .header-btns {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            border: none;
+            transition: background 0.4s ease, color 0.4s ease, border 0.4s ease;
+            text-decoration: none;
+        }
+
+        .btn-solid {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* Portfolio Layout */
+        .portfolio-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 0px;
+            object-fit: cover;
+        }
+
+        /* Specific layouts for the second page */
+        .grid-1-top-2-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .grid-1-top-2-bottom .bottom-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            gap: 20px;
+        }
+
+        .grid-2-rows {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            gap: 20px;
+        }
+
+        .grid-3-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3-cols .image-container {
+            height: 100%;
+        }
+
+        .grid-3-cols img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .text-content {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-top: 0px;
+            text-align: left;
+        }
+
+        .text-block {
+            margin-bottom: 25px;
+        }
+
+        .title {
+            font-weight: 700;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+            word-break: break-word;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .pages-wrapper {
+                scroll-snap-type: none;
+                /* Disable snap on mobile if content is too long */
+            }
+
+            .page {
+                min-height: auto;
+                padding-top: 100px;
+            }
+
+            .portfolio-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .btn {
+                font-size: 0.6rem;
+                padding: 6px 10px;
+            }
+
+            .grid-3-cols,
+            .grid-2x2,
+            .grid-2-rows {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                /* Stack vertically on small screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-btns">
+        <a href="index.html" class="btn btn-outline">Retour</a>
+        <button class="btn btn-solid" id="themeBtn">Mode Clair</button>
+    </div>
+
+    <div class="pages-wrapper">
+        <!-- Première Page -->
+        <div class="page">
+            <div class="portfolio-container">
+                <!-- Colonne Gauche -->
+                <div class="column">
+                    <div class="image-container">
+                        <!-- Remplacer les src par les vraies images -->
+                        <img src="portfolio/project1_1.jpg" alt="55P/Tempel-Tuttle" />
+                    </div>
+                    <div class="text-content">
+                        <div class="text-block">
+                            ↑↑↑<br>
+                            <span class="title">55P/Tempel-Tuttle</span><br>
+                            <span class="italic">À la manière d'une chute dans l'espace, installation générative son et
+                                lumière, hypnose algorithmique et contemplative.</span>
+                        </div>
+                        <div class="text-block">
+                            TouchDesigner et PureData, 2023<br>
+                            Extraits de vidéos lors de l'exposition "Merci de laisser la porte ouverte en sortant" aux
+                            Ateliers de Chanzy, Nantes, organisée par le collectif Hyper Terrier du 24 juin au 15
+                            juillet 2023.
+                        </div>
+                        <div class="text-block">
+                            Vidéos visibles sur Instagram :<br>
+                            <a href="https://www.instagram.com/p/C6EhPoxtUYs/?hl=fr"
+                                target="_blank">https://www.instagram.com/p/C6EhPoxtUYs/?hl=fr</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne Droite -->
+                <div class="column">
+                    <div class="image-container">
+                        <img src="portfolio/project1_2.jpg" alt="55P/Tempel-Tuttle détail" />
+                    </div>
+                    <div class="text-content">
+                        <div class="text-block">
+                            Créée avec le langage de programmation visuelle TouchDesigner et le langage de programmation
+                            multimédia PureData, cette installation a habité l'espace du sous-sol des Ateliers de
+                            Chanzy.
+                        </div>
+                        <div class="text-block">
+                            L'espace s'enveloppe d'une atmosphère sonore organique et sourde, qui réagit aux lumières et
+                            couleurs de l'image en temps réel.
+                        </div>
+                        <div class="text-block">
+                            Un extrait sonore est disponible dans l'épisode du 24/07/23 de l'émission "Ceci n'est pas
+                            une pipe" de All Ready Made, de 42min53 à 45min20.<br>
+                            <a href="https://podcastaddict.com/ceci-n-est-pas-une-pipe/episode/162494228"
+                                target="_blank">https://podcastaddict.com/ceci-n-est-pas-une-pipe/episode/162494228</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seconde Page -->
+        <div class="page">
+            <div class="portfolio-container">
+                <!-- Colonne Gauche -->
+                <div class="column">
+                    <div class="grid-1-top-2-bottom">
+                        <div class="image-container">
+                            <img src="portfolio/project2_1.jpg" alt="La maison brûle - Image principale"
+                                style="aspect-ratio: 16/9; object-fit: cover;" />
+                        </div>
+                        <div class="bottom-row">
+                            <div class="image-container">
+                                <img src="portfolio/project2_2.jpg" alt="La maison brûle - Détail 1"
+                                    style="aspect-ratio: 4/3; object-fit: cover;" />
+                            </div>
+                            <div class="image-container">
+                                <img src="portfolio/project2_3.jpg" alt="La maison brûle - Détail 2"
+                                    style="aspect-ratio: 4/3; object-fit: cover;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        <div class="text-block">
+                            ↑↑↑<br>
+                            <span class="title">La maison brûle, autant se réchauffer</span><br>
+                            <span class="italic">Où veut-on partir en vacances, où veut-on vivre, où veut-on lécher
+                                l'espace ???</span>
+                        </div>
+                        <div class="text-block">
+                            Réalisé avec Victor Petit Petit<br>
+                            TouchDesigner, 2023<br>
+                            Photos de l'exposition "Merci de laisser la porte ouverte en sortant" aux Ateliers de
+                            Chanzy, Nantes. Organisé par le collectif Hyper Terrier du 24 juin au 15 juillet 2023.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne Droite -->
+                <div class="column">
+                    <div class="grid-3-cols">
+                        <div class="image-container">
+                            <img src="portfolio/project3_1.jpg" alt="Tricolore - Vert"
+                                style="aspect-ratio: 9/16; object-fit: cover;" />
+                        </div>
+                        <div class="image-container">
+                            <img src="portfolio/project3_2.jpg" alt="Tricolore - Orange"
+                                style="aspect-ratio: 9/16; object-fit: cover;" />
+                        </div>
+                        <div class="image-container">
+                            <img src="portfolio/project3_3.jpg" alt="Tricolore - Rouge"
+                                style="aspect-ratio: 9/16; object-fit: cover;" />
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        <div class="text-block">
+                            ↑↑↑<br>
+                            <span class="title">Tricolore comme une république</span><br>
+                            <span class="italic">Un feu vert, un feu orange, un feu rouge, un stroboscope, déconseillé
+                                au public épileptique et au public de grande taille.</span>
+                        </div>
+                        <div class="text-block">
+                            Réalisé avec Victor Petit Petit<br>
+                            Feu tricolore, stroboscope, Arduino, 2020-2023<br>
+                            Photos de l'exposition "Merci de laisser la porte ouverte en sortant" aux Ateliers de
+                            Chanzy, Nantes. Organisé par le collectif Hyper Terrier du 24 juin au 15 juillet 2023.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Troisième Page -->
+        <div class="page">
+            <div class="portfolio-container">
+                <!-- Colonne Gauche -->
+                <div class="column">
+                    <div class="image-container">
+                        <img src="portfolio/project4_1.png" alt="Pointcloud chaos 1"
+                            style="aspect-ratio: 16/9; object-fit: cover;" />
+                    </div>
+
+                    <div class="text-content">
+                        <div class="text-block">
+                            ↑↑↑<br>
+                            <span class="title">Pointcloud chaos</span><br>
+                        </div>
+                        <div class="text-block">
+                            TouchDesigner et PureData, 2025<br>
+                            Extraits de vidéos, pour l'exposition "Projet Entropie" organisée dans le cadre d'un projet
+                            de médiation étudiants à l'université PSL à Paris, du 4 au 6 avril 2025.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne Droite -->
+                <div class="column">
+                    <div class="image-container">
+                        <img src="portfolio/project4_2.png" alt="Pointcloud chaos 2"
+                            style="aspect-ratio: 16/9; object-fit: cover;" />
+                    </div>
+                    <div class="image-container">
+                        <img src="portfolio/project4_3.png" alt="Pointcloud chaos 3"
+                            style="aspect-ratio: 16/9; object-fit: cover;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quatrième Page -->
+        <div class="page">
+            <div class="portfolio-container">
+                <!-- Colonne Gauche -->
+                <div class="column">
+                    <div class="grid-2x2">
+                        <div class="image-container">
+                            <img src="portfolio/project5_1.png" alt="TouchDesigner Love 1"
+                                style="aspect-ratio: 1/1; object-fit: cover;" />
+                        </div>
+                        <div class="image-container">
+                            <img src="portfolio/project5_2.png" alt="TouchDesigner Love 2"
+                                style="aspect-ratio: 1/1; object-fit: cover;" />
+                        </div>
+                        <div class="image-container">
+                            <img src="portfolio/project5_3.png" alt="TouchDesigner Love 3"
+                                style="aspect-ratio: 1/1; object-fit: cover;" />
+                        </div>
+                        <div class="image-container">
+                            <img src="portfolio/project5_4.png" alt="TouchDesigner Love 4"
+                                style="aspect-ratio: 1/1; object-fit: cover;" />
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        <div class="text-block">
+                            ↑↑↑<br>
+                            Éléments de la série <span class="title">"TouchDesigner Love"</span><br>
+                            TouchDesigner, extraits de vidéo, 2022-2026
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne Droite -->
+                <div class="column">
+                    <div class="grid-2-rows">
+                        <div class="image-container">
+                            <img src="portfolio/project6_1.png" alt="Mur tactile 1"
+                                style="aspect-ratio: 16/9; object-fit: cover;" />
+                        </div>
+                        <div class="image-container">
+                            <img src="portfolio/project6_2.png" alt="Mur tactile 2"
+                                style="aspect-ratio: 16/9; object-fit: cover;" />
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        <div class="text-block">
+                            ↑↑↑<br>
+                            Expérimentation de mur tactile<br>
+                            TouchDesigner, extraits de vidéo, 2022
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cinquième Page -->
+        <div class="page">
+            <div class="portfolio-container">
+                <!-- Colonne Gauche -->
+                <div class="column">
+                </div>
+
+                <!-- Colonne Droite -->
+                <div class="column">
+                    <div class="image-container">
+                        <img src="portfolio/project7_1.png" alt="Projection de visuels au Blockhaus DY10" />
+                    </div>
+
+                    <div class="text-content">
+                        <div class="text-block">
+                            ↑↑↑<br>
+                            Projection de visuels au Blockhaus DY10
+                        </div>
+                        <div class="text-block">
+                            Vidéos visibles sur Instagram :<br>
+                            <a href="https://www.instagram.com/p/CtqugzTsoLo/?hl=fr" target="_blank"
+                                class="italic">https://www.instagram.com/p/CtqugzTsoLo/?hl=fr</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const btn = document.getElementById("themeBtn");
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "light") {
+            body.classList.add("light-mode");
+            btn.textContent = "Mode Sombre";
+        }
+
+        btn.addEventListener("click", () => {
+            body.classList.toggle("light-mode");
+
+            if (body.classList.contains("light-mode")) {
+                btn.textContent = "Mode Sombre";
+                localStorage.setItem("theme", "light"); // LIGNE AJOUTÉE ICI
+            } else {
+                btn.textContent = "Mode Clair";
+                localStorage.setItem("theme", "dark");  // LIGNE AJOUTÉE ICI
+            }
+        });
+    </script>
+</body>
+
+</html>
